@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProviderRequest;
 use App\Http\Requests\UpdateProviderRequest;
+use App\Models\Material;
+use App\Models\MaterialProvider;
 use App\Models\Provider;
 
 class ProviderController extends Controller
@@ -15,7 +17,7 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        //
+        return view('provider.index',['providers'=>Provider::all()]);
     }
 
     /**
@@ -25,7 +27,7 @@ class ProviderController extends Controller
      */
     public function create()
     {
-        //
+        return view('provider.create');
     }
 
     /**
@@ -36,7 +38,11 @@ class ProviderController extends Controller
      */
     public function store(StoreProviderRequest $request)
     {
-        //
+        Provider::create($request->validate([
+            'name' => 'required',
+            'cuit'=>'required']));
+
+        return redirect(route('providers.index'));
     }
 
     /**
@@ -47,7 +53,10 @@ class ProviderController extends Controller
      */
     public function show(Provider $provider)
     {
-        //
+        $materials=$provider->materials;
+
+        // Material::table('materials')->where()
+        return view('provider.show',compact('provider', 'materials'));
     }
 
     /**

@@ -15,7 +15,7 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        //
+        return view('material.index',['materials'=>Material::all()]);
     }
 
     /**
@@ -47,7 +47,7 @@ class MaterialController extends Controller
      */
     public function show(Material $material)
     {
-        //
+        return view('material.show',compact('material'));
     }
 
     /**

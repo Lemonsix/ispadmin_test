@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ContractController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\RequirementOrderController;
 use App\Http\Controllers\UserController;
-use App\Models\Client;
-use App\Models\Contract;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,7 +34,9 @@ Route::resources(
         'plans' => PlanController::class,
         'requirementOrders'=>RequirementOrderController::class,
         'requirementOrders.orderDetails' => OrderDetailController::class,
-        'users'=> UserController::class
+        'users'=> UserController::class,
+        'materials' => MaterialController::class,
+        'providers' => ProviderController::class
     ]
 );
 
@@ -57,3 +59,7 @@ Route::resources(
 // Route::get('/plans/{plan}', [PlanController::class, 'show'])->name('plans.show');
 // Route::get('/plans/create', [PlanController::class, 'create'])->name('plans.create');
 // Route::get('/plans/{plan}/edit', [PlanController::class, 'edit'])->name('plans.edit');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
