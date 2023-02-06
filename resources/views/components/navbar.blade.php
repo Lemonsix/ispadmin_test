@@ -86,6 +86,7 @@
                     <li><a class="dropdown-item" href="{{ route('requirementOrders.create') }}">Nueva Orden</a></li>
                     <li><a class="dropdown-item" href="{{ route('materials.index') }}">Listar Materiales</a></li>
                     <li><a class="dropdown-item" href="{{ route('providers.index') }}">Listar Proveedores</a></li>
+                    <li><a class="dropdown-item" href="{{ route('projects.create') }}">Nuevo Proyecto</a></li>
                 </ul>
             </div>
 

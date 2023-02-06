@@ -20,7 +20,7 @@ class RequirementOrderController extends Controller
      */
     public function index()
     {
-        return view('requirement-order.index', ['requirementOrders' => RequirementOrder::all()]);
+        return view('requirement-order.index', ['requirementOrders' => RequirementOrder::orderBy('deadline')->get()]);
     }
 
     /**

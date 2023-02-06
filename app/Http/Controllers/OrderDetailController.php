@@ -22,9 +22,9 @@ class OrderDetailController extends Controller
      */
     public function create(RequirementOrder $requirementOrder)
     {
-        $materials = Material::has('providers')->with('providers')->get();
-        $providers = Provider::has('materials')->with('materials')->get();
-        $projects = Project::all();
+        $materials = Material::has('providers')->with('providers')->orderBy('name')->get();
+        $providers = Provider::has('materials')->with('materials')->orderBy('name')->get();
+        $projects = Project::orderBy('name')->get();
         return view('order-detail.create', compact('requirementOrder', 'providers', 'projects', 'materials'));
     }
 

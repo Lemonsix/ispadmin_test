@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMaterialRequest;
 use App\Http\Requests\UpdateMaterialRequest;
 use App\Models\Material;
+use App\Models\MaterialProvider;
+use App\Models\Provider;
 
 class MaterialController extends Controller
 {
@@ -25,7 +27,7 @@ class MaterialController extends Controller
      */
     public function create()
     {
-        //
+        return view('material.create',['providers'=>Provider::all()]);
     }
 
     /**
@@ -36,7 +38,21 @@ class MaterialController extends Controller
      */
     public function store(StoreMaterialRequest $request)
     {
-        //
+        $validated = ($request->validate([
+            'name' => 'required',
+            'description'=>'nullable',
+            'provider_id' => 'required'
+
+        ]));
+
+
+        $material['name'] = $validated['name'];
+        $material['description'] = $validated['description'];
+        Provider::find($validated['provider_id'])->materials()->create($material);
+        // $materialprovider['provider_id'] = $validated['provider_id'];
+        // $materialprovider['material'] = $validated['material'];
+        // MaterialProvider::create($materialprovider);
+        return redirect(route('materials.index'));
     }
 
     /**
