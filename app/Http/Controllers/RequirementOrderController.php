@@ -45,7 +45,7 @@ class RequirementOrderController extends Controller
      */
     public function store(Request $request)
     {
-        $requirementOrder = RequirementOrder::create($request->validate(['user_id' => 'required','deadline'=>'required|nullable']));
+        $requirementOrder = RequirementOrder::create($request->validate(['user_id' => 'required','deadline'=>'required|nullable|after:today']));
         return redirect(route('requirementOrders.show',$requirementOrder));
     }
 
@@ -67,8 +67,8 @@ class RequirementOrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(RequirementOrder $requirementOrder)
-    {
-        //
+    {   $users = User::all();
+        return view('requirement-order.edit', compact('requirementOrder','users'));
     }
 
     /**
@@ -80,7 +80,8 @@ class RequirementOrderController extends Controller
      */
     public function update(UpdateRequirementOrderRequest $request, RequirementOrder $requirementOrder)
     {
-        //
+        $requirementOrder->update($request->toArray());
+        return redirect(route('requirementOrders.show',$requirementOrder));
     }
 
     /**

@@ -17,7 +17,7 @@ class CreateRequirementOrdersTable extends Migration
             $table->id();
             $table->foreignId('user_id');//solicitante
             $table->date('deadline')->nullable();// fecha para la cual se necesita disponer de ese material
-            $table->enum('status',['active','requested','shipped','completed'])->default('active');
+            $table->enum('status',['activa','cotización','en viaje','completada','rechazada por compras','incompleta'])->default('activa');
             $table->timestamps();
         });
     }

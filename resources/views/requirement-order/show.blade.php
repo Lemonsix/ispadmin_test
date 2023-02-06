@@ -1,17 +1,19 @@
 <x-layout>
     <x-container>
         <div class="text-white col-md-4">
+            <a class='btn btn-sm btn-warning float-end' href="{{ route('requirementOrders.edit', $requirementOrder) }}"><i
+                    class="fas fa-solid fa-pen"></i></a>
             <div class="row">
-                <div class="col"><a>Id. de Orden:</a></div>
-                <div class="col">{{ $requirementOrder->id }}</div>
+                <div class="col-5"><a>Id. de Orden:</a></div>
+                <div class="col-5">{{ $requirementOrder->id }}</div>
             </div>
             <div class="row">
-                <div class="col"><a>Solicitante:</a></div>
-                <div class="col">{{ $requirementOrder->user->name }}</div>
+                <div class="col-5"><a>Solicitante:</a></div>
+                <div class="col-5">{{ $requirementOrder->user->name }}</div>
             </div>
             <div class="row">
-                <div class="col"><a>Fecha de requerimiento:</a></div>
-                <div class="col">{{ $requirementOrder->deadline }}</div>
+                <div class="col-5"><a>Fecha de requerimiento:</a></div>
+                <div class="col-5">{{ $requirementOrder->deadline }}</div>
             </div>
         </div>
 

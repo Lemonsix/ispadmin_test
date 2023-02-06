@@ -50,7 +50,7 @@ class OrderDetailController extends Controller
                     return $query->where('provider_id', $request->input('provider_id'));
                 })
             ],
-            'qty' => 'required',
+            'qty' => 'required|numeric|gt:0',
             'project_id' =>'required'
         ]);
 

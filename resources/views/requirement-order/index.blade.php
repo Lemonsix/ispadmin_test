@@ -1,28 +1,40 @@
 <x-layout>
-    @if ($requirementOrders->count())
+    <div class='bg-dark text-white'><a class='btn btn-success' href='{{ route('requirementOrders.create') }}'>Crear
+            solicitud de Materiales</a></div>
     <table class="table table-striped table-dark table-hover">
         <thead>
             <tr>
-                <th scope="col">Id</th>
+                <th scope="col" style="width:100px;">Ver detalle</th>
                 <th scope="col">Solicitante</th>
                 <th scope="col">Fecha limite</th>
+                <th scope="col">Estado</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($requirementOrders as $requirementOrder)
+            @if ($requirementOrders->count())
+                @foreach ($requirementOrders as $requirementOrder)
+                    <tr>
+                        <td class='text-center'>
+                            <a class='btn btn-sm btn-info' href="{{ route('requirementOrders.show', $requirementOrder) }}"><i
+                                class="fas fa-solid fa-bars"></i>
+                        </td>
+                        <td>
+                            <a
+                                href="{{ route('users.show', $requirementOrder->user->id) }}">{{ $requirementOrder->user->name }}</a>
+                        </td>
+                        <td>{{ $requirementOrder->deadline }}</td>
+                        <td class="{{ $requirementOrder->status == 'rechazada por compras' ? 'text-danger' : ($requirementOrder->status == 'en viaje' ? 'text-warning' : 'text-success') }}">
+                            {{ $requirementOrder->status }}
+                          </td>
+                    </tr>
+                @endforeach
+            @else
                 <tr>
-                    <td>
-                        <a href="{{ route('requirementOrders.show', $requirementOrder) }}">{{ $requirementOrder->id }}</a>
+                    <td colspan='4'>
+                        <h6 class="text-warning">No hay ordenes agregadas a la base de datos aún</h6>
                     </td>
-                    <td>
-                        <a href="{{ route('users.show', $requirementOrder->user->id) }}">{{ $requirementOrder->user->name }}</a>
-                    </td>
-                    <td>{{ $requirementOrder->deadline }}</td>
                 </tr>
-            @endforeach
+            @endif
         </tbody>
     </table>
-@else
-    <h6 class="text-white m-3">No hay ordenes de compra de materiales aún</h6>
-@endif
 </x-layout>

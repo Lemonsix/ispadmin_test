@@ -23,5 +23,8 @@ class RequirementOrder extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getStatusesAttribute() {
+        return ['activa','cotización','en viaje','completada','rechazada por compras','incompleta'];
+    }
 
 }

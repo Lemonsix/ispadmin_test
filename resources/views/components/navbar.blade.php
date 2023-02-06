@@ -47,46 +47,25 @@
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    Clientes
+                    ISP
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{{ route('clients.index') }}">Listar clientes</a></li>
-                    <li><a class="dropdown-item" href="{{ route('clients.create') }}">Nuevo cliente</a></li>
+                    <li><a class="dropdown-item" href="{{ route('clients.index') }}">Clientes</a></li>
+                    <li><a class="dropdown-item" href="{{ route('contracts.index') }}">Contratos</a></li>
+                    <li><a class="dropdown-item" href="{{ route('plans.index') }}">Planes</a></li>
                 </ul>
             </div>
 
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Contratos
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{{ route('contracts.index') }}">Listar Contratos</a></li>
-                    <li><a class="dropdown-item" href="{{ route('contracts.create') }}">Nuevo Contrato</a></li>
-                </ul>
-            </div>
-
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Planes
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{{ route('plans.index') }}">Listar Planes</a></li>
-                    <li><a class="dropdown-item" href="{{ route('plans.create') }}">Nuevo Plan</a></li>
-                </ul>
-            </div>
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     Req de materiales
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{{ route('requirementOrders.index') }}">Listar ordenes</a></li>
-                    <li><a class="dropdown-item" href="{{ route('requirementOrders.create') }}">Nueva Orden</a></li>
-                    <li><a class="dropdown-item" href="{{ route('materials.index') }}">Listar Materiales</a></li>
-                    <li><a class="dropdown-item" href="{{ route('providers.index') }}">Listar Proveedores</a></li>
-                    <li><a class="dropdown-item" href="{{ route('projects.create') }}">Nuevo Proyecto</a></li>
+                    <li><a class="dropdown-item" href="{{ route('requirementOrders.index') }}">Solicitudes</a></li>
+                    <li><a class="dropdown-item" href="{{ route('materials.index') }}">Materiales</a></li>
+                    <li><a class="dropdown-item" href="{{ route('providers.index') }}">Proveedores</a></li>
+                    <li><a class="dropdown-item" href="{{ route('projects.index') }}">Proyectos</a></li>
                 </ul>
             </div>
 

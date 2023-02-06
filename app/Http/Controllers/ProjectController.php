@@ -16,7 +16,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        return view('project.index',['projects'=>Project::all()]);
     }
 
     /**
@@ -37,7 +37,9 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        redirect(route('projects.show',Project::create($request->toArray())));
+        //redirect(route('projects.show',Project::create($request->toArray())));
+        Project::create($request->toArray());
+        return redirect(route('projects.index'));
     }
 
     /**

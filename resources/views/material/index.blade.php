@@ -1,5 +1,4 @@
 <x-layout>
-
 <div class='bg-dark text-white'><a class='btn btn-success' href='{{route('materials.create')}}'>Añadir Nuevo Materal</a><p class='text-danger mb-0'>*para añadir un nuevo material debe existir un proveedor en la db</p></div>
     <table class="table table-striped table-dark table-hover">
         <thead>
@@ -11,6 +10,7 @@
             </tr>
         </thead>
         <tbody>
+            @if ($materials->count())
             @foreach ($materials as $material)
                 <tr>
                     <td>{{ $material->name }}</td>
@@ -19,6 +19,13 @@
                     <td><button class='btn btn-info'><i class="fas fa-solid fa-bars"></i>  </button></td>
                 </tr>
             @endforeach
+            @else
+            <tr>
+                <td colspan='4'>
+                    <h5 class="text-warning text-center font-weight-bold">No hay materiales agregados a la base de datos aún</h5>
+                  </td>
+            </tr>
+        @endif
         </tbody>
     </table>
 </x-layout>
