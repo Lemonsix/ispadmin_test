@@ -35,6 +35,11 @@
 
             </tbody>
         </table>
-        <a class='btn btn-success' href="">+</a>
+        <form method='POST'
+    action="{{route('providers.destroy',$provider)}}">
+        @csrf
+        @method('DELETE')
+        <button class='btn btn-sm btn-danger float-end'><i class="fas fa-solid fa-eraser"></i></button>
+    </form>
     </x-container>
 </x-layout>

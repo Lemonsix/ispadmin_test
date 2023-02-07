@@ -8,7 +8,7 @@
                 <th scope='col'>Id</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">CUIT</th>
-                <th scope="col">Ver Materiales</th>
+                <th scope="col">Detalle</th>
             </tr>
         </thead>
         <tbody>

@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProviderRequest;
 use App\Http\Requests\UpdateProviderRequest;
-use App\Models\Material;
-use App\Models\MaterialProvider;
 use App\Models\Provider;
 
 class ProviderController extends Controller
@@ -54,8 +52,6 @@ class ProviderController extends Controller
     public function show(Provider $provider)
     {
         $materials=$provider->materials;
-
-        // Material::table('materials')->where()
         return view('provider.show',compact('provider', 'materials'));
     }
 
@@ -90,6 +86,7 @@ class ProviderController extends Controller
      */
     public function destroy(Provider $provider)
     {
-        //
+        $provider->delete();
+        return redirect(route('providers.index'));
     }
 }

@@ -5,6 +5,7 @@
         <thead>
             <tr>
                 <th scope="col" style="width:100px;">Ver detalle</th>
+                <th scope='col'>Id</th>
                 <th scope="col">Solicitante</th>
                 <th scope="col">Fecha limite</th>
                 <th scope="col">Estado</th>
@@ -15,26 +16,29 @@
                 @foreach ($requirementOrders as $requirementOrder)
                     <tr>
                         <td class='text-center'>
-                            <a class='btn btn-sm btn-info' href="{{ route('requirementOrders.show', $requirementOrder) }}"><i
-                                class="fas fa-solid fa-bars"></i>
+                            <a class='btn btn-sm btn-info'
+                                href="{{ route('requirementOrders.show', $requirementOrder) }}"><i
+                                    class="fas fa-solid fa-bars"></i>
                         </td>
+                        <td>{{$requirementOrder->id}}</td>
                         <td>
                             <a
                                 href="{{ route('users.show', $requirementOrder->user->id) }}">{{ $requirementOrder->user->name }}</a>
                         </td>
                         <td>{{ $requirementOrder->deadline }}</td>
-                        <td class="{{ $requirementOrder->status == 'rechazada por compras' ? 'text-danger' : ($requirementOrder->status == 'en viaje' ? 'text-warning' : 'text-success') }}">
+                        <td
+                            class="{{ $requirementOrder->status == 'rechazada por compras' ? 'text-danger' : ($requirementOrder->status == 'en viaje' ? 'text-warning' : 'text-success') }}">
                             {{ $requirementOrder->status }}
-                          </td>
+                        </td>
                     </tr>
                 @endforeach
-            @else
+                @else
                 <tr>
-                    <td colspan='4'>
-                        <h6 class="text-warning">No hay ordenes agregadas a la base de datos aún</h6>
-                    </td>
+                    <td colspan='5'>
+                        <h5 class="text-warning text-center font-weight-bold">No hay planes agregados a la base de datos aún</h5>
+                      </td>
                 </tr>
-            @endif
+                @endif
         </tbody>
     </table>
 </x-layout>

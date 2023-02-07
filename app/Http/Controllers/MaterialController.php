@@ -63,7 +63,9 @@ class MaterialController extends Controller
      */
     public function show(Material $material)
     {
-        return view('material.show',compact('material'));
+
+        $providers=$material->providers;
+        return view('material.show',compact('material','providers'));
     }
 
     /**
@@ -97,6 +99,7 @@ class MaterialController extends Controller
      */
     public function destroy(Material $material)
     {
-        //
+        $material->delete();
+        return redirect(route('materials.index'));
     }
 }

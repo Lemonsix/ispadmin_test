@@ -6,7 +6,7 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Descripcion</th>
                 <th scope="col">Stock</th>
-                <th scope="col">Ver Proveedores</th>
+                <th scope="col">Detalles</th>
             </tr>
         </thead>
         <tbody>
@@ -16,7 +16,7 @@
                     <td>{{ $material->name }}</td>
                     <td>{{ $material->description }}</td>
                     <td class='text-danger'>Proximamente</td>
-                    <td><button class='btn btn-info'><i class="fas fa-solid fa-bars"></i>  </button></td>
+                    <td><a href='{{route('materials.show',$material)}}' class='btn btn-info'><i class="fas fa-solid fa-bars"></i>  </a></td>
                 </tr>
             @endforeach
             @else

@@ -92,6 +92,7 @@ class RequirementOrderController extends Controller
      */
     public function destroy(RequirementOrder $requirementOrder)
     {
-        //
+        $requirementOrder->delete();
+        return redirect(route('requirementOrders.index'));
     }
 }
