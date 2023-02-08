@@ -10,24 +10,17 @@ use App\Models\Project;
 use App\Models\RequirementOrder;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Throwable;
 
 class RequirementOrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return view('requirement-order.index', ['requirementOrders' => RequirementOrder::orderBy('deadline')->get()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $users = User::all();
@@ -37,62 +30,42 @@ class RequirementOrderController extends Controller
         return view('requirement-order.create', compact('users', 'projects', 'materials', 'orderDetails'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function store(StoreRequirementOrderRequest $request)
     {
-        $requirementOrder = RequirementOrder::create($request->validate(['user_id' => 'required','deadline'=>'required|nullable|after:today']));
+        $requirementOrder = RequirementOrder::create($request->validated());
         return redirect(route('requirementOrders.show',$requirementOrder));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\RequirementOrder  $requirementOrder
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(RequirementOrder $requirementOrder)
     {
         return view('requirement-order.show', compact('requirementOrder'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\RequirementOrder  $requirementOrder
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(RequirementOrder $requirementOrder)
-    {   $users = User::all();
+
+    public function edit(RequirementOrder $requirementOrder){
+        $users = User::all();
         return view('requirement-order.edit', compact('requirementOrder','users'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateRequirementOrderRequest  $request
-     * @param  \App\Models\RequirementOrder  $requirementOrder
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(UpdateRequirementOrderRequest $request, RequirementOrder $requirementOrder)
     {
+
         $requirementOrder->update($request->toArray());
         return redirect(route('requirementOrders.show',$requirementOrder));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\RequirementOrder  $requirementOrder
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(RequirementOrder $requirementOrder)
     {
-        $requirementOrder->delete();
-        return redirect(route('requirementOrders.index'));
+        try{
+            $requirementOrder->delete();
+        } catch (Throwable $e) {
+            return redirect()->route('requirementOrders.index')
+            ->with('error','No se puede eliminar esta orden por dependencias');
+        }
+        return redirect()->route('requirementOrders.index')->with('success','Orden correctamente eliminada');
     }
 }

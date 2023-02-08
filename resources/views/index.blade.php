@@ -1,3 +1,3 @@
 <x-layout>
-    Main index
+    @section('title', 'Main index')
 </x-layout>

@@ -10,7 +10,7 @@ class Material extends Model
     use HasFactory;
 
     protected $guarded=[];
-
+    protected $fillable=['description','name'];
     /**
      * The providers that belong to the Material
      *

@@ -1,3 +1,4 @@
+@section('title', 'Contratos')
 <x-layout>
     <div class='bg-dark text-white'><a class='btn btn-success' href='{{route('contracts.create')}}'>Crear Contrato</a><p class='text-danger mb-0'>*para añadir un nuevo contrato debe existir un plan en la db</p></div>
 

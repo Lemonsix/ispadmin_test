@@ -15,8 +15,8 @@ class CreateMaterialProviderTable extends Migration
     {
         Schema::create('material_provider', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('material_id')->constrained();
-            $table->foreignId('provider_id')->constrained();
+            $table->foreignId('material_id')->constrained()->onDelete('cascade');
+            $table->foreignId('provider_id')->constrained()->onDelete('cascade');
             $table->unique(['material_id', 'provider_id']);
         });
     }

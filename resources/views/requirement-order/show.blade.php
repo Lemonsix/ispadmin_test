@@ -1,9 +1,8 @@
+@section('title', 'Listar Orden')
 <x-layout>
     <x-container>
-        <div class="text-white col-md-4 w-100">
-            <a class='btn btn-sm btn-warning' href="{{ route('requirementOrders.edit', $requirementOrder) }}"><i
-                    class="fas fa-solid fa-pen"></i></a>
 
+        <div class="text-white col-md-4 w-100">
             <div class="row">
                 <div class="col-5"><a>Id. de Orden:</a></div>
                 <div class="col-5">{{ $requirementOrder->id }}</div>
@@ -21,7 +20,6 @@
                 <div class="col-5">{{ $requirementOrder->status }}</div>
             </div>
         </div>
-
         <table class="table table-striped table-dark table-hover">
             <thead>
                 <tr>
@@ -39,20 +37,22 @@
                             <td>{{ $orderDetail->material->name }}</td>
                             <td>{{ $orderDetail->qty }}</td>
                             <td>{{ $orderDetail->provider->name }}</td>
+                            <td><x-button-modify :route="route('requirementOrders.orderDetails.edit',compact('requirementOrder','orderDetail'))"></x-button-modify>
+                           <x-button-destroy :route="route('requirementOrders.orderDetails.destroy',compact('requirementOrder','orderDetail'))"></x-button-destroy></td>
                         </tr>
                     @endforeach
                 @endif
-
-
             </tbody>
         </table>
-        <a class='btn btn-success'
-        href="{{ route('requirementOrders.orderDetails.create', $requirementOrder) }}">+</a>
-        <form method='POST'
-        action="{{route('requirementOrders.destroy',$requirementOrder)}}">
-            @csrf
-            @method('DELETE')
-            <button class='btn btn-sm btn-danger float-end'><i class="fas fa-solid fa-eraser"></i></button>
-        </form>
+        <table class='w-100 text-center'>
+            <tr>
+                <td><x-button-new :route="route('requirementOrders.orderDetails.create',$requirementOrder)"></x-button-new></td>
+                <td><x-button-modify :route="route('requirementOrders.edit', $requirementOrder)"></x-button-modify></td>
+                <td><x-button-destroy :route="route('requirementOrders.destroy',$requirementOrder)"></x-button-destroy></td>
+            </tr>
+        </table>
+
+
+
     </x-container>
 </x-layout>

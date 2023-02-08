@@ -1,3 +1,4 @@
+@section('title', 'Proveedores')
 <x-layout>
 
     <div class='bg-dark text-white'><a class='btn btn-success' href="{{ route('providers.create') }}">Añadir Nuevo

@@ -1,3 +1,4 @@
+@section('title', 'Planes')
 <x-layout>
     <div class='bg-dark text-white'><a class='btn btn-success' href='{{route('plans.create')}}'>Crear Plan</a></div>
     <table class="table table-striped table-dark table-hover">

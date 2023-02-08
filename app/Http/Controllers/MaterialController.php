@@ -7,99 +7,63 @@ use App\Http\Requests\UpdateMaterialRequest;
 use App\Models\Material;
 use App\Models\MaterialProvider;
 use App\Models\Provider;
+use Throwable;
 
 class MaterialController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function index() //listar materiales
     {
-        return view('material.index',['materials'=>Material::all()]);
+        return view('material.index', ['materials' => Material::all()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function create() //vista de crear nuevos materiales con sus proveedores
     {
-        return view('material.create',['providers'=>Provider::all()]);
+        $providers=Provider::all();
+        if($providers->count()){
+            return view('material.create', ['providers' => Provider::all()]);
+        }
+        return back()->with('error','No hay proveedores en la base de datos');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreMaterialRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreMaterialRequest $request)
+
+    public function store(StoreMaterialRequest $request) //almacenar nuevo material
     {
-        $validated = ($request->validate([
-            'name' => 'required',
-            'description'=>'nullable',
-            'provider_id' => 'required'
-
-        ]));
-
-
-        $material['name'] = $validated['name'];
-        $material['description'] = $validated['description'];
-        Provider::find($validated['provider_id'])->materials()->create($material);
-        // $materialprovider['provider_id'] = $validated['provider_id'];
-        // $materialprovider['material'] = $validated['material'];
-        // MaterialProvider::create($materialprovider);
-        return redirect(route('materials.index'));
+        $material = Material::create($validated = $request->validated());
+        $material->providers()->sync($validated['provider_id']);
+        return redirect(route('materials.show',$material));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Material  $material
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Material $material)
-    {
 
-        $providers=$material->providers;
-        return view('material.show',compact('material','providers'));
+    public function show(Material $material) //ver el detalle de 1 material en particular
+    {
+        $providers = $material->providers;
+        return view('material.show', compact('material', 'providers'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Material  $material
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Material $material)
+
+    public function edit(Material $material) //vista para editar un material existente
     {
-        //
+        return view('material.edit', compact('material'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateMaterialRequest  $request
-     * @param  \App\Models\Material  $material
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateMaterialRequest $request, Material $material)
+
+    public function update(UpdateMaterialRequest $request, Material $material) //persistir un cambio en un material exist
     {
-        //
+        $material->update($request->toArray());
+        return redirect(route('material.show', $material));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Material  $material
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Material $material)
+
+    public function destroy(Material $material) //borrar un material existente
     {
-        $material->delete();
+        try{
+            $material->delete();
+        } catch(Throwable $e){
+            return redirect(route('materials.index'))->with('error','No se pudo eliminar el material por dependencias');
+        }
+
         return redirect(route('materials.index'));
     }
 }

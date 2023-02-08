@@ -6,35 +6,23 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use Illuminate\Support\Arr;
+use Throwable;
 
 class ProjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return view('project.index',['projects'=>Project::all()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
        return view('project.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreProjectRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(StoreProjectRequest $request)
     {
         //redirect(route('projects.show',Project::create($request->toArray())));
@@ -42,48 +30,33 @@ class ProjectController extends Controller
         return redirect(route('projects.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Project $project)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Project $project)
     {
-        //
+        return view('project.edit',compact('project'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateProjectRequest  $request
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $project->update($request->toArray());
+        return redirect(route('projects.index'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Project $project)
     {
-        //
+        try{
+            $project->delete();
+        } catch(Throwable $e){
+            return redirect(route('projects.index'))->with('error', 'No se pudo eliminar el proyecto por dependencias');
+        }
+        return redirect(route('projects.index'))->with('success', 'El proyecto ha sido elmiminado correctamente');
     }
 }

@@ -1,3 +1,4 @@
+@section('title', 'Ver Material')
 <x-layout>
     <x-container>
         <div class="container text-white">
@@ -12,7 +13,7 @@
             <thead>
                 <tr>
                     <th scope='col'>Id</th>
-                    <th scope="col">Nombre</th>
+                    <th scope="col">Proveedor</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,11 +33,11 @@
             </td>
         </tr>
     @endif
-    <form method='POST'
-    action="{{route('materials.destroy',$material)}}">
-        @csrf
-        @method('DELETE')
-        <button class='btn btn-sm btn-danger float-end'><i class="fas fa-solid fa-eraser"></i></button>
-    </form>
+    <table class='w-100 text-center'>
+        <tr>
+            <td><x-button-modify :route="route('materials.edit', $material)"></x-button-modify></td>
+            <td><x-button-destroy :route="route('materials.destroy',$material)"></x-button-destroy></td>
+        </tr>
+    </table>
 </x-layout>
 </x-container>

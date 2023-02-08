@@ -1,3 +1,4 @@
+@section('title', 'Ver contrato')
 <x-layout>
     <x-container>
         <table class="table table-striped table-dark table-hover">

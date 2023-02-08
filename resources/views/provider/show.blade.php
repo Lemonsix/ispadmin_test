@@ -1,3 +1,4 @@
+@section('title', 'Ver Material')
 <x-layout>
     <x-container>
         <div class="text-white col-md-4">
@@ -35,11 +36,11 @@
 
             </tbody>
         </table>
-        <form method='POST'
-    action="{{route('providers.destroy',$provider)}}">
-        @csrf
-        @method('DELETE')
-        <button class='btn btn-sm btn-danger float-end'><i class="fas fa-solid fa-eraser"></i></button>
-    </form>
+        <table class='w-100 text-center'>
+            <tr>
+                <td><x-button-modify :route="route('providers.edit', $provider)"></x-button-modify></td>
+                <td><x-button-destroy :route="route('providers.destroy',$provider)"></x-button-destroy></td>
+            </tr>
+        </table>
     </x-container>
 </x-layout>

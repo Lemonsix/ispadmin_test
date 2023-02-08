@@ -1,3 +1,4 @@
+@section('title', 'Crear Material')
 <x-layout>
     <x-container>
         <form class='text-white' method="POST" action='{{ route('materials.store') }}'>
@@ -16,12 +17,13 @@
 
             <div class="form-group col">
                 <label class="form-label" for="provider_id"> Proveedor</label>
-                <select class="form-control" name="provider_id" id="provider_id" required>
+                <select class="form-control" name="provider_id[]" id="provider_id" required multiple>
                     <option value="">--Seleccione material requerido--</option>
                     @foreach ($providers as $provider)
                         <option value="{{ $provider->id }}">{{ $provider->name }}</option>
                     @endforeach
                 </select>
+                <span>* es posible seleccionar varios proveedores para el material, manteniendo apretando ctrl y haciendo click en cada uno</span>
             </div>
 
             <div class="container text-center">

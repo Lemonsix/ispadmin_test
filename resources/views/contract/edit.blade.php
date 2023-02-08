@@ -1,3 +1,4 @@
+@section('title', 'Editar Contratos')
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,3 +1,4 @@
+@section('title', 'Crear Plan')
 <x-layout>
     <x-container>
         <form class='text-white'>

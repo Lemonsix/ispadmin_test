@@ -1,5 +1,6 @@
+@section('title', 'Ordenes de Material')
 <x-layout>
-    <div class='bg-dark text-white'><a class='btn btn-success' href='{{ route('requirementOrders.create') }}'>Crear
+    <div class='bg-dark text-white p-3'><a class='btn btn-success' href='{{ route('requirementOrders.create') }}'>Crear
             solicitud de Materiales</a></div>
     <table class="table table-striped table-dark table-hover">
         <thead>
@@ -23,7 +24,7 @@
                         <td>{{$requirementOrder->id}}</td>
                         <td>
                             <a
-                                href="{{ route('users.show', $requirementOrder->user->id) }}">{{ $requirementOrder->user->name }}</a>
+                                href="{{ route('users.show', $requirementOrder->user->id) }}" data-bs-toggle="tooltip" title="Default tooltip">{{ $requirementOrder->user->name }}</a>
                         </td>
                         <td>{{ $requirementOrder->deadline }}</td>
                         <td
@@ -40,5 +41,6 @@
                 </tr>
                 @endif
         </tbody>
+
     </table>
 </x-layout>

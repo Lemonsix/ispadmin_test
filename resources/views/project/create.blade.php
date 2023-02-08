@@ -1,3 +1,4 @@
+@section('title', 'Crear Proyecto')
 <x-layout>
     <x-container>
         <form class='text-white' method='POST' action='{{ route('projects.store') }}'>

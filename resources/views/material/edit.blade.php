@@ -1,10 +1,10 @@
 @section('title', 'Editar Orden')
 <x-layout>
     <x-container>
-        <form class='text-white' action='{{ route('requirementOrders.update', $requirementOrder) }}' method="POST">
+        <form class='text-white' action='{{ route('materials.update', $material) }}' method="POST">
             @csrf
             @method('PATCH')
-            <div class='row'>
+          {{--   <div class='row'>
                 <div class="form-group col">
                     <label class="form-label" for="user_id">Solicitante</label>
                     <select class="form-control" name="user_id" id="user_id" required>
@@ -29,15 +29,8 @@
                     </select>
                 </div>
 
-            </div>
-            <div class="container text-center">
-                <div class="row">
-                    <div class="col">
-                        <button class='btn btn-success mt-3' type="submit">Guardar cambios</button>
-                    </div>
-
-                </div>
-            </div>
+            </div> --}}
+            <x-form-buttons></x-form-buttons>
 
         </form>
         @if ($errors->any())

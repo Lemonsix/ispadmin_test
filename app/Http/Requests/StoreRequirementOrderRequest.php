@@ -23,8 +23,6 @@ class StoreRequirementOrderRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        return ['user_id' => 'required','deadline'=>['required','nullable','after:yesterday']];
     }
 }

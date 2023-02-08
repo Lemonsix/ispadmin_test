@@ -1,5 +1,6 @@
+@section('title', 'Materiales')
 <x-layout>
-<div class='bg-dark text-white'><a class='btn btn-success' href='{{route('materials.create')}}'>Añadir Nuevo Materal</a><p class='text-danger mb-0'>*para añadir un nuevo material debe existir un proveedor en la db</p></div>
+<div class='bg-dark text-white'><a class='btn btn-success' href='{{route('materials.create')}}'>Añadir Nuevo Material</a></div>
     <table class="table table-striped table-dark table-hover">
         <thead>
             <tr>

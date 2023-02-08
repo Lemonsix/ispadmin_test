@@ -1,3 +1,4 @@
+@section('title', 'Creacion de Contratos')
 <x-layout>
     <x-container>
         <form class='text-white'>

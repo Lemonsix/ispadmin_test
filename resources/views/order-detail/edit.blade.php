@@ -1,4 +1,4 @@
-@section('title', 'Crear Detalle de orden')
+@section('title', 'Editar detalle de orden')
 <x-layout>
     <x-container>
         @if (session('errors'))

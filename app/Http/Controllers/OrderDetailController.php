@@ -11,15 +11,11 @@ use App\Models\RequirementOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
+use Throwable;
 
 class OrderDetailController extends Controller
 {
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @param  \App\Models\RequirementOrder  $requirementOrder
-     * @return \Illuminate\Http\Response
-     */
+
     public function create(RequirementOrder $requirementOrder)
     {
         $materials = Material::has('providers')->with('providers')->orderBy('name')->get();
@@ -28,13 +24,7 @@ class OrderDetailController extends Controller
         return view('order-detail.create', compact('requirementOrder', 'providers', 'projects', 'materials'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\RequirementOrder  $requirementOrder
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request, RequirementOrder $requirementOrder)
     {
         $validated = $request->validate([
@@ -61,52 +51,32 @@ class OrderDetailController extends Controller
         return redirect(route('requirementOrders.show', $requirementOrder));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\RequirementOrder  $requirementOrder
-     * @param  \App\Models\OrderDetail  $orderDetail
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(RequirementOrder $requirementOrder, OrderDetail $orderDetail)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\RequirementOrder  $requirementOrder
-     * @param  \App\Models\OrderDetail  $orderDetail
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(RequirementOrder $requirementOrder, OrderDetail $orderDetail)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\RequirementOrder  $requirementOrder
-     * @param  \App\Models\OrderDetail  $orderDetail
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, RequirementOrder $requirementOrder, OrderDetail $orderDetail)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\RequirementOrder  $requirementOrder
-     * @param  \App\Models\OrderDetail  $orderDetail
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(RequirementOrder $requirementOrder, OrderDetail $orderDetail)
     {
-        //
+        try{
+            $orderDetail->delete();
+        } catch (Throwable $e){
+            return back()->with('error','No se ha podido eliminar el detalle');
+        }
+        return back()->with('success','Se ha eliminado el detalle correctamente');
     }
 }

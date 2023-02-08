@@ -1,3 +1,4 @@
+@section('title', 'Editar plan')
 <!DOCTYPE html>
 <html lang="en">
 <head>

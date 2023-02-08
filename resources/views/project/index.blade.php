@@ -1,3 +1,4 @@
+@section('title', 'Proyectos')
 <x-layout>
     <div class='bg-dark text-white'><a class='btn btn-success' href='{{ route('projects.create') }}'>Añadir Nuevo
             Proyecto</a>
@@ -8,6 +9,7 @@
                 <th scope='col'>Id</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Descripcion</th>
+                <th scope='col'>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +20,10 @@
                     <td>{{ $project->id }}</td>
                     <td>{{ $project->name }}</td>
                     <td>{{ $project->description }}</td>
+                    <td>
+                        <x-button-modify :route="route('projects.edit',$project)"></x-button-modify>
+                        <x-button-destroy :route="route('projects.destroy',$project)"></x-button-destroy>
+                    </td>
                 </tr>
             @endforeach
             @else

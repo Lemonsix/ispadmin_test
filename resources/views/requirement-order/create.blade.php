@@ -1,3 +1,4 @@
+@section('title', 'Crear Orden')
 <x-layout>
     <x-container>
         <form class='text-white' action='{{route('requirementOrders.store')}}' method="POST">
