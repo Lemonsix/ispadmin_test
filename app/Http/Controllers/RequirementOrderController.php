@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DestroyRequirementOrderRequest;
 use App\Http\Requests\StoreRequirementOrderRequest;
 use App\Http\Requests\UpdateRequirementOrderRequest;
 use App\Models\Material;
@@ -58,7 +59,7 @@ class RequirementOrderController extends Controller
     }
 
 
-    public function destroy(RequirementOrder $requirementOrder)
+    public function destroy(DestroyRequirementOrderRequest $request, RequirementOrder $requirementOrder)
     {
         try{
             $requirementOrder->delete();

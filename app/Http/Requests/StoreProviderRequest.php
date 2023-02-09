@@ -21,10 +21,19 @@ class StoreProviderRequest extends FormRequest
      *
      * @return array
      */
+
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'cuit' => 'required'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required' => 'El proveedor debe tener un nombre',
+            'cuit.required' => 'El cuit no puede estar vacío'
         ];
     }
 }

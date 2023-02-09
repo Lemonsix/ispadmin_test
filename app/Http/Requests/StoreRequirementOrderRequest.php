@@ -25,4 +25,12 @@ class StoreRequirementOrderRequest extends FormRequest
     {
         return ['user_id' => 'required','deadline'=>['required','nullable','after:yesterday']];
     }
+    public function messages()
+    {
+        return [
+            'user_id.required' => 'Hay que seleccionar un usuario solicitante',
+            'deadline.required' => 'La solicitud debe contener una fecha',
+            'deadline.after' => 'La fecha de solicitud debe ser posterior al dia de hoy',
+        ];
+    }
 }

@@ -13,7 +13,7 @@ class UpdateMaterialRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,17 @@ class UpdateMaterialRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'description' => 'nullable',
+            'provider_id' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'El nombre no puede estar vacio',
+            'provider_id.required' => 'Es necesario seleccionar un proveedor para el material'
         ];
     }
 }

@@ -9,9 +9,9 @@
             @endforeach
         @endif
 
-        <form class="row text-white" action='{{route('requirementOrders.orderDetails.store',$requirementOrder)}}' method="POST">
+        <form class="row text-white" action='{{route('requirementOrders.orderDetails.update',compact('requirementOrder','orderDetail'))}}' method="POST">
             @csrf
-
+            @method('PATCH')
         <x-order-detail-form :materials='$materials' :providers='$providers' :projects='$projects' :requirementOrder='$requirementOrder'>
         </x-order-detail-form>
     </form>

@@ -9,7 +9,7 @@ class OrderDetail extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
+    protected $fillable = ['requirement_order_id','project_id','material_provider_id','qty'];
     /**
      * Get the materialProvider that owns the OrderDetail
      *

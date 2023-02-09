@@ -11,7 +11,6 @@
 
         <form class="row text-white" action='{{route('requirementOrders.orderDetails.store',$requirementOrder)}}' method="POST">
             @csrf
-
         <x-order-detail-form :materials='$materials' :providers='$providers' :projects='$projects' :requirementOrder='$requirementOrder'>
         </x-order-detail-form>
     </form>

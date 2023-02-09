@@ -24,7 +24,16 @@ class StoreProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'description' => 'nullable'
+        ];
+    }
+
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'El proyecto debe tener un nombre',
         ];
     }
 }

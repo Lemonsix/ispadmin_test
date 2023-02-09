@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateMaterialRequest;
 use App\Models\Material;
 use App\Models\MaterialProvider;
 use App\Models\Provider;
+use App\Models\User;
 use Throwable;
 
 class MaterialController extends Controller
@@ -45,14 +46,15 @@ class MaterialController extends Controller
 
     public function edit(Material $material) //vista para editar un material existente
     {
-        return view('material.edit', compact('material'));
+        $providers = Provider::all();
+        return view('material.edit', compact('material','providers'));
     }
 
 
     public function update(UpdateMaterialRequest $request, Material $material) //persistir un cambio en un material exist
     {
         $material->update($request->toArray());
-        return redirect(route('material.show', $material));
+        return redirect(route('materials.show', $material));
     }
 
 
