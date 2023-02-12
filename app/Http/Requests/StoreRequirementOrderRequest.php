@@ -23,7 +23,11 @@ class StoreRequirementOrderRequest extends FormRequest
      */
     public function rules()
     {
-        return ['user_id' => 'required','deadline'=>['required','nullable','after:yesterday']];
+        return [
+            'user_id' => 'required',
+            'deadline'=>['required','nullable','after:yesterday'],
+            'priority' => 'required|in:baja,media,alta'
+        ];
     }
     public function messages()
     {
@@ -31,6 +35,8 @@ class StoreRequirementOrderRequest extends FormRequest
             'user_id.required' => 'Hay que seleccionar un usuario solicitante',
             'deadline.required' => 'La solicitud debe contener una fecha',
             'deadline.after' => 'La fecha de solicitud debe ser posterior al dia de hoy',
+            'priority.required' => 'Debe especificarse una prioridad',
+            'priority.in' => 'La prioridad debe ser Baja, Media, o Alta. NO puede ser otro valor'
         ];
     }
 }

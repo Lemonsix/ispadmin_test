@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrderDetailRequest;
 use App\Http\Requests\UpdateOrderDetailRequest;
 use App\Models\Material;
+use App\Models\MaterialProvider;
 use App\Models\OrderDetail;
 use App\Models\Project;
 use App\Models\Provider;
@@ -28,9 +29,11 @@ class OrderDetailController extends Controller
     public function store(StoreOrderDetailRequest $request, RequirementOrder $requirementOrder)
     {
         $validated = $request->validated();
-        $validated['material_provider_id'] = Provider::find($validated['provider_id'])->materials->first(fn($material)=>$material->id == $validated['material_id'])->id;
+        $pito = MaterialProvider::where('material_id', $validated['material_id'])->where('provider_id', $validated['provider_id'])->first();
+        $validated['material_provider_id'] = $pito->id;
         $validated['requirement_order_id'] = $requirementOrder->id;
         OrderDetail::create($validated);
+
         return redirect(route('requirementOrders.show', $requirementOrder));
     }
 
@@ -69,4 +72,6 @@ class OrderDetailController extends Controller
         }
         return back()->with('success', 'Se ha eliminado el detalle correctamente');
     }
+
+
 }

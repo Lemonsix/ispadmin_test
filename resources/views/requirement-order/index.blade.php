@@ -2,45 +2,14 @@
 <x-layout>
     <div class='bg-dark text-white p-3'><a class='btn btn-success' href='{{ route('requirementOrders.create') }}'>Crear
             solicitud de Materiales</a></div>
-    <table class="table table-striped table-dark table-hover">
-        <thead>
-            <tr>
-                <th scope="col" style="width:100px;">Ver detalle</th>
-                <th scope='col'>Id</th>
-                <th scope="col">Solicitante</th>
-                <th scope="col">Fecha limite</th>
-                <th scope="col">Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if ($requirementOrders->count())
-                @foreach ($requirementOrders as $requirementOrder)
-                    <tr>
-                        <td class='text-center'>
-                            <a class='btn btn-sm btn-info'
-                                href="{{ route('requirementOrders.show', $requirementOrder) }}"><i
-                                    class="fas fa-solid fa-bars"></i>
-                        </td>
-                        <td>{{$requirementOrder->id}}</td>
-                        <td>
-                            <a
-                                href="{{ route('users.show', $requirementOrder->user->id) }}" data-bs-toggle="tooltip" title="Default tooltip">{{ $requirementOrder->user->name }}</a>
-                        </td>
-                        <td>{{ $requirementOrder->deadline }}</td>
-                        <td
-                            class="{{ $requirementOrder->status == 'rechazada por compras' ? 'text-danger' : ($requirementOrder->status == 'en viaje' ? 'text-warning' : 'text-success') }}">
-                            {{ $requirementOrder->status }}
-                        </td>
-                    </tr>
-                @endforeach
-                @else
-                <tr>
-                    <td colspan='5'>
-                        <h5 class="text-warning text-center font-weight-bold">No hay planes agregados a la base de datos aún</h5>
-                      </td>
-                </tr>
-                @endif
-        </tbody>
+    <div class="d-flex grow-1 container-fluid h-100 justify-content-evenly align-items-center">
 
-    </table>
+        @foreach ($requirementOrders as $statusName => $statusType)
+        <x-kanban :status='$statusName'>
+            @foreach ($statusType as $status)
+                    <x-card :requirementOrder="$status"></x-card>
+            @endforeach
+        </x-kanban>
+        @endforeach
+    </div>
 </x-layout>

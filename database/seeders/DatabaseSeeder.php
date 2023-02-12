@@ -15,17 +15,17 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            ProfileSeeder::class,
-            VendorSeeder::class,
-            OnumodelSeeder::class,
-            OnuSeeder::class,
-            PlanSeeder::class,
-            ProjectSeeder::class,
-            ProviderSeeder::class,
-            MaterialSeeder::class,
-            MaterialProviderSeeder::class,
-            RequirementOrderSeeder::class,
-            OrderDetailSeeder::class
+            // ProfileSeeder::class,
+            // VendorSeeder::class,
+            // OnumodelSeeder::class,
+            // OnuSeeder::class,
+            // PlanSeeder::class,
+            // ProjectSeeder::class,
+            // ProviderSeeder::class,
+            // MaterialSeeder::class,
+            // MaterialProviderSeeder::class,
+            // RequirementOrderSeeder::class,
+            // OrderDetailSeeder::class
         ]);
     }
 }

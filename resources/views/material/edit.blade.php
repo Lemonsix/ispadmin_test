@@ -12,6 +12,11 @@
                     <input class="form-control" name="name" id="name" placeholder="Rollo de Fibra" required>
                 </div>
 
+                <div class="form-group">
+                    <label for="description" class="form-label">Descripción</label>
+                    <input class="form-control" name="description" id="description" placeholder="Alguna descripcion" required>
+                </div>
+
                 <div class="form-group col">
                     <label class="form-label" for="provider_id"> Proveedor</label>
                     <select class="form-control" name="provider_id[]" id="provider_id" required multiple>

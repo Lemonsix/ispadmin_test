@@ -3,8 +3,9 @@
     <x-container>
         <div class="container text-white">
             <div class="col">
-                <div class="row align-middle"><a>Id <strong>{{ $material->id }}</a></strong></div>
-                <div class="row align-middle"><a>Nombre <strong>{{ $material->name }}</strong></a></div>
+                <div class="row align-middle"><a>Id: <strong>{{ $material->id }}</a></strong></div>
+                <div class="row align-middle"><a>Nombre: <strong>{{ $material->name }}</strong></a></div>
+                <div class='row align-middle'><a>Descripción: <strong>{{$material->description}}</strong></a></div>
             </div>
         </div>
         </table>

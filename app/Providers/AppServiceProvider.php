@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $logger = new Logger('name');
+        $logger->pushHandler(new StreamHandler(storage_path('logs/debug.log'), Logger::DEBUG));
     }
 }

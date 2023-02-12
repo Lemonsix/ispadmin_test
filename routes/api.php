@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Material;
+use App\Models\Provider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/providers/{material_id}', function ($material_id) {
+    // get the providers that sell the selected material
+    // $providers = Material::find($material_id)->providers;
+    // return the providers as JSON
+    return response()->json(Material::find($material_id)->providers);
 });

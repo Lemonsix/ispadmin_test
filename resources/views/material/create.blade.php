@@ -12,7 +12,7 @@
             <div class="form-group">
                 <label for="description">Descripción</label>
                 <textarea name='description' class="form-control h-25" placeholder="Rollo de fibra optica para instalación de calle"
-                    id="description" required></textarea>
+                    id="description"></textarea>
             </div>
 
             <div class="form-group col">

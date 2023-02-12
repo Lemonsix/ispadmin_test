@@ -18,7 +18,12 @@ class RequirementOrderController extends Controller
 
     public function index()
     {
-        return view('requirement-order.index', ['requirementOrders' => RequirementOrder::orderBy('deadline')->get()]);
+        $requirementOrders = RequirementOrder::all()->groupBy('status');
+        /* return $requirementOrders->filter(function ($orders) {
+            return $orders->first()->status === 'activa';
+        }); */
+        // return $requirementOrders->get('activa');
+        return view('requirement-order.index',compact('requirementOrders'));
     }
 
 
