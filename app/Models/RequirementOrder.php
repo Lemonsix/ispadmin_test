@@ -27,4 +27,11 @@ class RequirementOrder extends Model
         return ['borrador','activa','cotizacion','en viaje','completada','rechazada','incompleta'];
     }
 
+    public function scopeKanban($query){
+        $query->whereNotIn('status',['completada', 'rechazada', 'incompleta'])->orderByRaw(
+            "FIELD(status, 'borrador', 'activa', 'cotizacion', 'en viaje')")
+        ->orderByRaw("FIELD(priority, 'alta', 'media', 'baja')")
+        ->orderBy('deadline','asc');
+    }
+
 }

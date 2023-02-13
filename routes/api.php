@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RequirementOrderController;
 use App\Models\Material;
 use App\Models\Provider;
 use Illuminate\Http\Request;
@@ -27,3 +28,5 @@ Route::get('/providers/{material_id}', function ($material_id) {
     // return the providers as JSON
     return response()->json(Material::find($material_id)->providers);
 });
+
+Route::get('/getData', [RequirementOrderController::class,'getData']);

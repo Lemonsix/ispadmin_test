@@ -10,8 +10,7 @@ use App\Models\OrderDetail;
 use App\Models\Project;
 use App\Models\RequirementOrder;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 use Throwable;
 
 class RequirementOrderController extends Controller
@@ -19,18 +18,18 @@ class RequirementOrderController extends Controller
 
     public function index()
     {
-        /* $requirementOrders = RequirementOrder::all()->groupBy('status','priority');
-        return $requirementOrders; */
-        $requirementOrders = RequirementOrder::orderByRaw(
-            "FIELD(status, 'borrador', 'activa', 'cotizacion', 'en viaje', 'completada', 'rechazada', 'incompleta')"
-        )->orderByRaw(
-            "FIELD(priority, 'alta', 'media', 'baja')"
-        )
-        ->orderBy('deadline','asc')->get();
-        $requirementOrders = $requirementOrders->groupBy('status');
-        return view('requirement-order.index', compact('requirementOrders'));
+        if (request()->query('kanban')) {
+            $requirementOrders = RequirementOrder::kanban()->get()->groupBy('status');
+            return view('requirement-order.index', compact('requirementOrders'));
+        } else {
+            $requirementOrders = RequirementOrder::orderBy('deadline', 'asc')->get();
+            return view('requirement-order.index', compact('requirementOrders'));
+        }
     }
 
+    public function getData(){
+        return RequirementOrder::all();
+    }
 
     public function create()
     {
