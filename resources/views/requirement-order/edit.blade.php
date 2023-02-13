@@ -24,7 +24,7 @@
                     <label class="form-label" for="status">Estado</label>
                     <select class="form-control" name="status" id="status" required>
                         @foreach ($requirementOrder->statuses as $status)
-                            <option {{ $status == $requirementOrder->status ? 'selected' : '' }}>{{$status}}</option>
+                            <option {{ $status == $requirementOrder->status ? 'selected' : '' }} value="{{$status}}">{{Str::ucfirst($status)}}</option>
                         @endforeach
                     </select>
                 </div>

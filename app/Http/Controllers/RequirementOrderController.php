@@ -11,6 +11,7 @@ use App\Models\Project;
 use App\Models\RequirementOrder;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Throwable;
 
 class RequirementOrderController extends Controller
@@ -18,12 +19,16 @@ class RequirementOrderController extends Controller
 
     public function index()
     {
-        $requirementOrders = RequirementOrder::all()->groupBy('status');
-        /* return $requirementOrders->filter(function ($orders) {
-            return $orders->first()->status === 'activa';
-        }); */
-        // return $requirementOrders->get('activa');
-        return view('requirement-order.index',compact('requirementOrders'));
+        /* $requirementOrders = RequirementOrder::all()->groupBy('status','priority');
+        return $requirementOrders; */
+        $requirementOrders = RequirementOrder::orderByRaw(
+            "FIELD(status, 'borrador', 'activa', 'cotizacion', 'en viaje', 'completada', 'rechazada', 'incompleta')"
+        )->orderByRaw(
+            "FIELD(priority, 'alta', 'media', 'baja')"
+        )
+        ->orderBy('deadline','asc')->get();
+        $requirementOrders = $requirementOrders->groupBy('status');
+        return view('requirement-order.index', compact('requirementOrders'));
     }
 
 
@@ -40,7 +45,7 @@ class RequirementOrderController extends Controller
     public function store(StoreRequirementOrderRequest $request)
     {
         $requirementOrder = RequirementOrder::create($request->validated());
-        return redirect(route('requirementOrders.show',$requirementOrder));
+        return redirect(route('requirementOrders.show', $requirementOrder));
     }
 
 
@@ -50,9 +55,10 @@ class RequirementOrderController extends Controller
     }
 
 
-    public function edit(RequirementOrder $requirementOrder){
+    public function edit(RequirementOrder $requirementOrder)
+    {
         $users = User::all();
-        return view('requirement-order.edit', compact('requirementOrder','users'));
+        return view('requirement-order.edit', compact('requirementOrder', 'users'));
     }
 
 
@@ -60,18 +66,18 @@ class RequirementOrderController extends Controller
     {
 
         $requirementOrder->update($request->toArray());
-        return redirect(route('requirementOrders.show',$requirementOrder));
+        return redirect(route('requirementOrders.show', $requirementOrder));
     }
 
 
     public function destroy(DestroyRequirementOrderRequest $request, RequirementOrder $requirementOrder)
     {
-        try{
+        try {
             $requirementOrder->delete();
         } catch (Throwable $e) {
             return redirect()->route('requirementOrders.index')
-            ->with('error','No se puede eliminar esta orden por dependencias');
+                ->with('error', 'No se puede eliminar esta orden por dependencias');
         }
-        return redirect()->route('requirementOrders.index')->with('success','Orden correctamente eliminada');
+        return redirect()->route('requirementOrders.index')->with('success', 'Orden correctamente eliminada');
     }
 }

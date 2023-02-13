@@ -11,7 +11,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 
-<body class='vh-100 bg-secondary'>
+<body class='minvh-100 bg-secondary'>
     <!-- navbar -->
     <x-navbar></x-navbar>
     <x-flash-message></x-flash-message>

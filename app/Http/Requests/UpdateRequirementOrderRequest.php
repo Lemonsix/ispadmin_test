@@ -13,7 +13,8 @@ class UpdateRequirementOrderRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->requirementOrder->status == 'activa';
+        return true;
+        /* return $this->requirementOrder->status == 'borrador'; */
     }
 
 

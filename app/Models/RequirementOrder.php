@@ -24,7 +24,7 @@ class RequirementOrder extends Model
     }
 
     public function getStatusesAttribute() {
-        return ['activa','cotización','en viaje','completada','rechazada por compras','incompleta'];
+        return ['borrador','activa','cotizacion','en viaje','completada','rechazada','incompleta'];
     }
 
 }
