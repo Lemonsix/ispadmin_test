@@ -27,8 +27,9 @@ class RequirementOrderController extends Controller
         }
     }
 
-    public function getData(){
-        return RequirementOrder::all();
+    public function getData(){ //esta funcion es para cargar el AGGrid
+        $requirementOrders = RequirementOrder::with('user')->withCount('orderDetails')->get();
+        return $requirementOrders;
     }
 
     public function create()
@@ -48,7 +49,7 @@ class RequirementOrderController extends Controller
     }
 
 
-    public function show(RequirementOrder $requirementOrder)
+    public function show(RequirementOrder $requirementOrder) //aca se deberia poder subir imagenes
     {
         return view('requirement-order.show', compact('requirementOrder'));
     }

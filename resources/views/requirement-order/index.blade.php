@@ -26,10 +26,9 @@
                 </div>
             @else
                 <!-- Si la vista no es kanban-->
+                <input type="hidden" id="showRequirementOrder" value="{{route('requirementOrders.show',1)}}">
                 <div>
                     <x-requirement-order-grid></x-requirement-order-grid>
-
-
                 <input type="hidden" name="kanban" value="true">
             @endif
             <button type='submit' class='btn btn-small btn-warning position-absolute top-50 end-0 '>K/G</button>

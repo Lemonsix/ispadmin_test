@@ -8,29 +8,4 @@
 
  <!-- The div that will host the grid. ag-theme-alpine is the theme. -->
  <!-- The gid will be the size that this element is given. -->
- <div id="myGrid" class="ag-theme-alpine-dark" style="height: 80vh; width: 80vw"></div>
-
- <script>
-     window.onload = () => {
-         axios.get('/api/getData').then(function(response) {
-                 const gridOptions = {
-                     columnDefs: [
-                        {headerName:"N°",field: "pv+id"},
-                        {headerName:"Solicitante:",field: "user_id"},
-                        {headerName:"Fecha",field: 'created_at'},
-                        {headerName:"Status", field: "status"},
-                        {headerName:"Fecha req",field:"deadline"},
-                        {headerName:"Prioridad",field: "priority"}],
-                     rowData: response.data
-                 };
-                 console.log(response.data);
-                 // Pass the gridOptions object to the ag-Grid constructor to create the table
-                 var gridDiv = document.querySelector('#myGrid');
-                 new agGrid.Grid(gridDiv, gridOptions);
-
-             })
-             .catch(function(error) {
-                 console.log(error);
-             });
-     };
- </script>
+ <div id="myGrid" class="ag-theme-alpine-dark" style="height: 89vh; width: 100vw; padding: 0; box-sizing:border-box;"></div>

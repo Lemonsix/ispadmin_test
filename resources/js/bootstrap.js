@@ -3,6 +3,7 @@ window._ = require('lodash');
 try {
     require('bootstrap');
     require('@popperjs/core');
+    require('./grid')
 } catch (e) {}
 
 /**
