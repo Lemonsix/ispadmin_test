@@ -1,7 +1,6 @@
 @section('title', 'Listar Orden')
 <x-layout>
     <x-container>
-
         <div class="text-white col-md-4 w-100">
             <div class="row">
                 <div class="col-5"><a>Id. de Orden:</a></div>
@@ -37,8 +36,16 @@
                             <td>{{ $orderDetail->material->name }}</td>
                             <td>{{ $orderDetail->qty }}</td>
                             <td>{{ $orderDetail->provider->name }}</td>
-                            <td><x-button-modify :route="route('requirementOrders.orderDetails.edit',compact('requirementOrder','orderDetail'))"></x-button-modify>
-                           <x-button-destroy :route="route('requirementOrders.orderDetails.destroy',compact('requirementOrder','orderDetail'))"></x-button-destroy></td>
+                            <td>
+                                <x-button-modify :route="route(
+                                    'requirementOrders.orderDetails.edit',
+                                    compact('requirementOrder', 'orderDetail'),
+                                )"></x-button-modify>
+                                <x-button-destroy :route="route(
+                                    'requirementOrders.orderDetails.destroy',
+                                    compact('requirementOrder', 'orderDetail'),
+                                )"></x-button-destroy>
+                            </td>
                         </tr>
                     @endforeach
                 @endif
@@ -46,13 +53,48 @@
         </table>
         <table class='w-100 text-center'>
             <tr>
-                <td><x-button-new :route="route('requirementOrders.orderDetails.create',$requirementOrder)"></x-button-new></td>
-                <td><x-button-modify :route="route('requirementOrders.edit', $requirementOrder)"></x-button-modify></td>
-                <td><x-button-destroy :route="route('requirementOrders.destroy',$requirementOrder)"></x-button-destroy></td>
+                <td>
+                    <x-button-new :route="route('requirementOrders.orderDetails.create', $requirementOrder)"></x-button-new>
+                </td>
+                <td>
+                    <x-button-modify :route="route('requirementOrders.edit', $requirementOrder)"></x-button-modify>
+                </td>
+                <td>
+                    <x-button-destroy :route="route('requirementOrders.destroy', $requirementOrder)"></x-button-destroy>
+                </td>
             </tr>
         </table>
+    </x-container>
 
-
-
+    <x-container>
+        <div class="text-white">
+            <table class='w-100 text-center'>
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre Archivo</th>
+                        <th scope="col">Extensión</th>
+                        <th scope="col">Tamaño</th>
+                        <th scope="col">Fecha de subida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if ($requirementOrder->uploadedDocument != null)
+                        @foreach ($requirementOrder->uploadedDocument as $file)
+                            <tr>
+                                <td>{{ $file->name }}</td>
+                                <td>{{ $file->extension }}</td>
+                                <td>{{ $file->size }}</td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan='4'>
+                                <h5 class="text-warning text-center font-weight-bold">Aún no hay documentos adjuntados a esta orden</h5>
+                            </td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
+        </div>
     </x-container>
 </x-layout>

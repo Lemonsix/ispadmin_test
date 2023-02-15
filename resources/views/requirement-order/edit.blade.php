@@ -29,6 +29,11 @@
                     </select>
                 </div>
 
+                <div class="mb-3 col">
+                    <label for="formFileMultiple" class="form-label">Subir archivos</label>
+                    <input class="form-control" type="file" id="formFileMultiple" multiple>
+                  </div>
+
             </div>
             <div class="container text-center">
                 <div class="row">
@@ -38,6 +43,7 @@
 
                 </div>
             </div>
+
 
         </form>
         @if ($errors->any())
