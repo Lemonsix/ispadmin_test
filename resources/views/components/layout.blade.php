@@ -20,7 +20,7 @@
     <x-navbar></x-navbar>
     <x-flash-message></x-flash-message>
     <!-- contenido -->
-    <div id="app" class='h-max  bg-white text-black dark:bg-gray-900 dark:text-white'>
+    <div id="app" class='h-max  bg-white text-black dark:bg-gray-900 dark:text-white flex flex-col py-2 content-between'>
         {{ $slot }}
     </div>
 
