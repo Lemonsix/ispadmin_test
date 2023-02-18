@@ -67,29 +67,51 @@
     </x-container>
 
     <x-container>
+        <form action="{{ route('uploaded-documents.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-3">
+                <label for="uploadedDocument" class="form-label">Subir archivos</label>
+                <input type="hidden" name="requirement_order_id" value="{{ $requirementOrder->id }}">
+                <div class="input-group">
+                    <input class="form-control" type="file" name="uploadedDocument" id="uploadedDocument"
+                        enctype="multipart/form-data">
+                    <input class="form-control" type="text" name='description' id='description'
+                        placeholder="Inserte una descripción">
+                    <button class="btn btn-success" type="submit">Subir documento</button>
+                </div>
+            </div>
+        </form>
         <div class="text-white">
             <table class='w-100 text-center'>
                 <thead>
                     <tr>
                         <th scope="col">Nombre Archivo</th>
-                        <th scope="col">Extensión</th>
                         <th scope="col">Tamaño</th>
                         <th scope="col">Fecha de subida</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Borrar archivo</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($requirementOrder->uploadedDocument != null)
-                        @foreach ($requirementOrder->uploadedDocument as $file)
+                    @if ($uploadedDocuments ?? null)
+                        @foreach ($uploadedDocuments as $document)
                             <tr>
-                                <td>{{ $file->name }}</td>
-                                <td>{{ $file->extension }}</td>
-                                <td>{{ $file->size }}</td>
+                                <td><a href="{{ asset('storage/' . $document->path) }}" target="_blank">{{ $document->id }}</a></td>
+                                <td>{{ $document->size }}</td>
+                                <td>{{ $document->updated_at }}</td>
+                                <td>{{ $document->description }}</td>
+                                <td>
+
+
+                                    <x-button-destroy-file :route="route('uploaded-documents.destroy', $document)" :fileId="$document->id" />
+                                </td>
                             </tr>
                         @endforeach
                     @else
                         <tr>
                             <td colspan='4'>
-                                <h5 class="text-warning text-center font-weight-bold">Aún no hay documentos adjuntados a esta orden</h5>
+                                <h5 class="text-warning text-center font-weight-bold">Aún no hay documentos adjuntados a
+                                    esta orden</h5>
                             </td>
                         </tr>
                     @endif

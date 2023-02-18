@@ -39,6 +39,10 @@ class RequirementOrder extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function uploadedDocuments(){
+        return $this->hasMany(UploadedDocument::class);
+    }
+
     public function getStatusesAttribute()
     {
         return ['borrador', 'activa', 'cotizacion', 'en viaje', 'completada', 'rechazada', 'incompleta'];

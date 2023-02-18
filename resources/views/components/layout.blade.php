@@ -9,16 +9,22 @@
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Import de Flowbite para navbar-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
+
 </head>
 
-<body class='minvh-100 bg-secondary'>
+<body class='min-h-screen'>
     <!-- navbar -->
     <x-navbar></x-navbar>
     <x-flash-message></x-flash-message>
     <!-- contenido -->
-    <div id="app" class='h-75'>
+    <div id="app" class='h-max  bg-white text-black dark:bg-gray-900 dark:text-white'>
         {{ $slot }}
     </div>
+
+
 </body>
 
 </html>

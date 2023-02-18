@@ -26,13 +26,10 @@
                         @foreach ($requirementOrder->statuses as $status)
                             <option {{ $status == $requirementOrder->status ? 'selected' : '' }} value="{{$status}}">{{Str::ucfirst($status)}}</option>
                         @endforeach
-                    </select>
+                    </select>ber function store() on null
                 </div>
 
-                <div class="mb-3 col">
-                    <label for="formFileMultiple" class="form-label">Subir archivos</label>
-                    <input class="form-control" type="file" id="formFileMultiple" multiple>
-                  </div>
+
 
             </div>
             <div class="container text-center">

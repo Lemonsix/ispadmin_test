@@ -9,6 +9,7 @@ use App\Models\Material;
 use App\Models\OrderDetail;
 use App\Models\Project;
 use App\Models\RequirementOrder;
+use App\Models\UploadedDocument;
 use App\Models\User;
 
 use Throwable;
@@ -51,7 +52,9 @@ class RequirementOrderController extends Controller
 
     public function show(RequirementOrder $requirementOrder) //aca se deberia poder subir imagenes
     {
-        return view('requirement-order.show', compact('requirementOrder'));
+        $uploadedDocuments = $requirementOrder->uploadedDocuments;
+
+        return view('requirement-order.show', compact('requirementOrder', 'uploadedDocuments'));
     }
 
 

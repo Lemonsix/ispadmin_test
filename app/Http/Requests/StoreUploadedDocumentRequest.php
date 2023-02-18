@@ -13,7 +13,7 @@ class StoreUploadedDocumentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true; // crear validaciones custom
     }
 
     /**
@@ -22,9 +22,19 @@ class StoreUploadedDocumentRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
-        return [
-            //
-        ];
-    }
+{
+    return [
+        'uploadedDocument' => 'required|mimes:pdf,jpeg,png,jpg,img|max:20000'
+    ];
+}
+
+public function messages()
+{
+    return [
+        'uploadedDocument.required' => 'No se ha seleccionado un archivo.',
+        'uploadedDocument.mimes' => 'El archivo debe ser de tipo PDF, JPEG, PNG, JPG O IMG.',
+        'uploadedDocument.max' => 'El tamaño del archivo debe ser menor a 20MB.',
+        'uploadedDocument.description.required' => 'El archivo debe contener una descripción'
+    ];
+}
 }

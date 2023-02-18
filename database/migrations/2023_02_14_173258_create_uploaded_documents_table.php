@@ -16,6 +16,8 @@ class CreateUploadedDocumentsTable extends Migration
         Schema::create('uploaded_documents', function (Blueprint $table) {
             $table->id();
             $table->string('path');
+            $table->bigInteger('size');
+            $table->string('description');
             $table->foreignId('requirement_order_id')->constrained();
             $table->timestamps();
         });
